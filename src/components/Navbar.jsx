@@ -14,12 +14,12 @@ const Navbar = () => {
     return (
         <nav className="bg-blue-600 text-white shadow-md">
             <div className="container mx-auto flex justify-between items-center py-4 px-6">
-                {/* Logo */}
+
                 <Link to="/" className="text-2xl font-bold">
                     TraceBack
                 </Link>
 
-                {/* Desktop Links */}
+
                 <div className="hidden md:flex space-x-6 items-center">
                     <NavLink to="/" className={({ isActive }) => isActive ? "underline" : ""}>
                         Home
@@ -42,7 +42,7 @@ const Navbar = () => {
                     )}
                 </div>
 
-                {/* Profile or Login Button */}
+
                 <div className="flex items-center space-x-4">
                     {user ? (
                         <div className="relative">
@@ -75,7 +75,7 @@ const Navbar = () => {
                     )}
                 </div>
 
-                {/* Mobile Menu Toggle */}
+
                 <button
                     className="md:hidden text-2xl focus:outline-none"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -84,7 +84,7 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* Mobile Links */}
+
             {isMenuOpen && (
                 <div className="md:hidden bg-blue-500 py-4 px-6">
                     <NavLink

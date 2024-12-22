@@ -4,6 +4,7 @@ export default {
     "index.html",
     "./src/**/*.{vue,js,ts,jsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {},
   },

@@ -1,10 +1,13 @@
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth.jsx';
 
 const Login = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state || '/'
 
     const { signInWithGoogle, logIn, setUser } = useAuth()
 
@@ -19,6 +22,7 @@ const Login = () => {
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#3085d6',
             });
+            navigate(from, { replace: true })
         } catch (err) {
             console.error(err)
             Swal.fire({
@@ -47,6 +51,7 @@ const Login = () => {
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#3085d6',
                 });
+                navigate(from, { replace: true })
             })
         } catch (err) {
             console.error(err)

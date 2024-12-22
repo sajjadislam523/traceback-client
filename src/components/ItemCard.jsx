@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ItemCard = ({ item }) => {
     return (
@@ -20,10 +21,10 @@ const ItemCard = ({ item }) => {
                     <p><strong>Contact:</strong> {item.contactInfo.displayName} ({item.contactInfo.email})</p>
                     <p><strong>Post Date:</strong> {new Date(item.date).toLocaleDateString()}</p>
                 </div>
-                {/* Button aligned to the bottom */}
-                <button type="button" className="flex items-center justify-center w-full p-3 mt-4 font-semibold tracking-wide text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none">
+
+                <Link to={`/items/${item._id}`} type="button" className="flex items-center justify-center w-full p-3 mt-4 font-semibold tracking-wide text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none">
                     View Details
-                </button>
+                </Link>
             </div>
         </div>
     );

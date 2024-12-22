@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import documentsFound from "../assets/homeCard/documentsFound.jpg";
+import dogFound from "../assets/homeCard/dogFound.jpg";
+import lostWallet from "../assets/homeCard/lostWallet.jpg";
 import useTheme from "../hooks/useTheme.jsx";
 
 const Home = () => {
@@ -16,13 +19,13 @@ const Home = () => {
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <Link
-                                to="/report-lost"
+                                to="/addItems"
                                 className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
                             >
                                 Report Lost Item
                             </Link>
                             <Link
-                                to="/find-item"
+                                to="/allItems"
                                 className="px-6 py-3 font-semibold bg-blue-700 rounded-lg shadow-md dark:bg-blue-900 hover:bg-blue-800 dark:hover:bg-blue-600"
                             >
                                 Find Lost Item
@@ -64,21 +67,21 @@ const Home = () => {
                         <h2 className="mb-8 text-3xl font-bold text-center text-gray-800 dark:text-gray-100">Success Stories</h2>
                         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                             <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
-                                <img src="/success1.jpg" alt="Story 1" className="mb-4 rounded-lg" />
+                                <img src={lostWallet} alt="Story 1" className="mb-4 rounded-lg" />
                                 <h3 className="mb-2 text-xl font-semibold dark:text-gray-100">Lost Wallet Found</h3>
                                 <p className="text-gray-600 dark:text-gray-300">
                                     "Thanks to TraceBack, I was able to find my lost wallet in just two days!"
                                 </p>
                             </div>
                             <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
-                                <img src="/success2.jpg" alt="Story 2" className="mb-4 rounded-lg" />
+                                <img src={dogFound} alt="Story 2" className="mb-4 rounded-lg" />
                                 <h3 className="mb-2 text-xl font-semibold dark:text-gray-100">Found Dog Reunited</h3>
                                 <p className="text-gray-600 dark:text-gray-300">
                                     "The platform made it easy to connect with the dog's owner."
                                 </p>
                             </div>
                             <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
-                                <img src="/success3.jpg" alt="Story 3" className="mb-4 rounded-lg" />
+                                <img src={documentsFound} alt="Story 3" className="mb-4 rounded-lg" />
                                 <h3 className="mb-2 text-xl font-semibold dark:text-gray-100">Important Documents</h3>
                                 <p className="text-gray-600 dark:text-gray-300">
                                     "I was worried I would never find my documents, but TraceBack saved the day."

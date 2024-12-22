@@ -43,7 +43,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="px-6 bg-gray-100 shadow-lg navbar dark:bg-gray-900 dark:text-gray-100">
+        <div className={`px-6 bg-gray-100 shadow-lg sticky top-0 z-50 navbar ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'}`}>
             {/* Left Section */}
             <div className="flex-1">
                 <Link

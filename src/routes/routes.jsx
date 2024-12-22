@@ -46,7 +46,9 @@ const routes = createBrowserRouter([
                     <PrivateRoute>
                         <ItemDetails />
                     </PrivateRoute>
-                )
+                ),
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/items/${params.id}`)
+
             },
             {
                 path: '/myItems',

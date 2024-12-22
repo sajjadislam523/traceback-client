@@ -82,15 +82,18 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
                 {/* Theme Toggle */}
                 <div className="flex items-center gap-2">
+                    <label htmlFor="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-800">
 
-                    <label className="relative inline-flex items-center cursor-pointer">
-                        <input
-                            type="checkbox"
-                            checked={theme === "dark"}
-                            onChange={toggleTheme}
-                            className="sr-only"
-                        />
-                        <div className="w-10 h-6 bg-gray-200 dark:bg-gray-700 rounded-full peer focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800 peer-checked:after:translate-x-4 peer-checked:after:bg-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-400 dark:after:bg-gray-600 after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                        <span className="relative">
+                            <input
+                                checked={theme === "dark"}
+                                onChange={toggleTheme}
+                                id="Toggle1"
+                                type="checkbox"
+                                className="hidden peer" />
+                            <div className="w-10 h-6 rounded-full shadow-inner dark:bg-gray-600 peer-checked:dark:bg-violet-600"></div>
+                            <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto dark:bg-gray-100"></div>
+                        </span>
                     </label>
                 </div>
 

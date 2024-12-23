@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { CiEdit } from "react-icons/ci";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Loading from '../../components/Loading.jsx';
 import useAuth from '../../hooks/useAuth.jsx';
 
 const MyItems = () => {
     const { loading, setLoading, user } = useAuth()
     const [items, setItems] = useState([])
-
     const fetchItems = async () => {
         try {
             const res = await axios.get(`${import.meta.env.VITE_API_URL}/myItems/${user.email}`)
@@ -24,6 +24,39 @@ const MyItems = () => {
     useEffect(() => {
         fetchItems()
     }, [user.email])
+
+    // delete an item
+    const handleDelete = async (id) => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'cancel',
+        });
+
+        if (result.isConfirmed) {
+            try {
+                await axios.delete(`${import.meta.env.VITE_API_URL}/item/${id}`);
+                setItems(items.filter((item) => item._id !== id));
+                Swal.fire(
+                    'Deleted!',
+                    'Your item has been deleted.',
+                    'success'
+                )
+            } catch (err) {
+                Swal.fire(
+                    'Error!',
+                    'Failed to delete item.',
+                    'error'
+                )
+            }
+        }
+    }
+
     return (
         <div className="max-w-5xl mx-auto mt-8">
             <h1 className="text-3xl font-bold text-center">Manage My Items</h1>

@@ -1,16 +1,33 @@
-import React from "react";
+import axios from "axios";
+import { motion } from "framer-motion"; // Import framer motion
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import "react-tabs/style/react-tabs.css"; // Import default styles for react-tabs
 import documentsFound from "../assets/homeCard/documentsFound.jpg";
 import dogFound from "../assets/homeCard/dogFound.jpg";
 import lostWallet from "../assets/homeCard/lostWallet.jpg";
+import ItemCard from "../components/ItemCard.jsx";
 import useTheme from "../hooks/useTheme.jsx";
 
 const Home = () => {
     const { theme } = useTheme();
 
+    const [items, setItems] = useState([]);
+
+    const fetchItems = async () => {
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/allItems`)
+        setItems(data);
+    }
+
+    useEffect(() => {
+        fetchItems()
+    }, [])
+
     return (
         <div className={theme === "dark" ? "dark" : ""}>
             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-200">
+                {/* Hero Section */}
                 <section className="relative py-20 text-white bg-blue-500 dark:bg-blue-800">
                     <div className="container px-6 mx-auto text-center">
                         <h1 className="mb-6 text-4xl font-bold md:text-5xl">Welcome to TraceBack</h1>
@@ -34,11 +51,42 @@ const Home = () => {
                     </div>
                 </section>
 
+                {/* Latest Find & Lost Items Section */}
+                <section className="py-16 bg-gray-100 dark:bg-gray-800">
+                    <div className="container px-6 mx-auto">
+                        <h2 className="mb-8 text-3xl font-bold text-center text-gray-800 dark:text-gray-100">
+                            Latest Find & Lost Items
+                        </h2>
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                            {items
+                                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                                .slice(0, 6)
+                                .map((item) => (
+                                    <ItemCard key={item._id} item={item} />
+                                ))}
+                        </div>
+                        <div className="mt-8 text-center">
+                            <Link
+                                to="/allItems"
+                                className="px-6 py-3 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                            >
+                                See All
+                            </Link>
+                        </div>
+                    </div>
+                </section>
 
+
+                {/* How It Works Section */}
                 <section className="py-16 bg-gray-100 dark:bg-gray-800">
                     <div className="container px-6 mx-auto text-center">
                         <h2 className="mb-8 text-3xl font-bold text-gray-800 dark:text-gray-100">How It Works</h2>
-                        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                        <motion.div
+                            className="grid grid-cols-1 gap-8 md:grid-cols-3"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.5 }}
+                        >
                             <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
                                 <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">1. Report</h3>
                                 <p className="text-gray-700 dark:text-gray-200">
@@ -57,15 +105,20 @@ const Home = () => {
                                     Contact the person who reported the item for verification.
                                 </p>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </section>
 
-
+                {/* Success Stories Section */}
                 <section className="py-16 bg-blue-50 dark:bg-gray-800">
                     <div className="container px-6 mx-auto">
                         <h2 className="mb-8 text-3xl font-bold text-center text-gray-800 dark:text-gray-100">Success Stories</h2>
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                        <motion.div
+                            className="grid grid-cols-1 gap-6 md:grid-cols-3"
+                            initial={{ y: 50, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.5 }}
+                        >
                             <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
                                 <img src={lostWallet} alt="Story 1" className="mb-4 rounded-lg" />
                                 <h3 className="mb-2 text-xl font-semibold dark:text-gray-100">Lost Wallet Found</h3>
@@ -87,38 +140,107 @@ const Home = () => {
                                     "I was worried I would never find my documents, but TraceBack saved the day."
                                 </p>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section className="py-16 bg-gray-100 dark:bg-gray-900">
-                    <div className="container px-6 mx-auto text-center">
-                        <h2 className="mb-8 text-3xl font-bold text-gray-800 dark:text-gray-100">Popular Categories</h2>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <Link to="/category/electronics" className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                                Electronics
-                            </Link>
-                            <Link to="/category/documents" className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                                Documents
-                            </Link>
-                            <Link to="/category/accessories" className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                                Accessories
-                            </Link>
-                            <Link to="/category/others" className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                                Others
-                            </Link>
-                        </div>
+                        </motion.div>
                     </div>
                 </section>
 
+                {/* Popular Categories Section with React Tabs */}
+                <section className="py-16 dark:bg-gray-900">
+                    <div className="container px-6 mx-auto">
+                        <h2 className="mb-8 text-3xl font-bold text-center text-gray-800 dark:text-gray-100">Popular Categories</h2>
+                        <Tabs>
+                            <TabList className="flex justify-center gap-8">
+                                <Tab
+                                    className={({ selected }) =>
+                                        `px-4 py-2 border-b-2 ${selected
+                                            ? "border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-100"
+                                            : "border-transparent text-gray-600 dark:text-gray-400"
+                                        }`
+                                    }
+                                >
+                                    Electronics
+                                </Tab>
+                                <Tab
+                                    className={({ selected }) =>
+                                        `px-4 py-2 border-b-2 ${selected
+                                            ? "border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-100"
+                                            : "border-transparent text-gray-600 dark:text-gray-400"
+                                        }`
+                                    }
+                                >
+                                    Documents
+                                </Tab>
+                                <Tab
+                                    className={({ selected }) =>
+                                        `px-4 py-2 border-b-2 ${selected
+                                            ? "border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-100"
+                                            : "border-transparent text-gray-600 dark:text-gray-400"
+                                        }`
+                                    }
+                                >
+                                    Accessories
+                                </Tab>
+                                <Tab
+                                    className={({ selected }) =>
+                                        `px-4 py-2 border-b-2 ${selected
+                                            ? "border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-100"
+                                            : "border-transparent text-gray-600 dark:text-gray-400"
+                                        }`
+                                    }
+                                >
+                                    Others
+                                </Tab>
+                            </TabList>
 
-                <footer className="py-6 text-white bg-gray-800 dark:bg-gray-700">
-                    <div className="container px-6 mx-auto text-center">
-                        <p className="text-sm">© 2024 TraceBack. All Rights Reserved.</p>
-                        <p className="mt-2 text-sm">
-                            Need help? <Link to="/contact" className="text-blue-400 hover:underline">Contact Us</Link>
-                        </p>
+                            <TabPanel>
+                                <p className="text-center text-gray-700 dark:text-gray-300">
+                                    Find and report electronic items like laptops, phones, and more.
+                                </p>
+                            </TabPanel>
+                            <TabPanel>
+                                <p className="text-center text-gray-700 dark:text-gray-300">
+                                    Manage lost or found important documents like passports or IDs.
+                                </p>
+                            </TabPanel>
+                            <TabPanel>
+                                <p className="text-center text-gray-700 dark:text-gray-300">
+                                    Search for accessories like watches, jewelry, and more.
+                                </p>
+                            </TabPanel>
+                            <TabPanel>
+                                <p className="text-center text-gray-700 dark:text-gray-300">
+                                    Discover and report other lost or found items.
+                                </p>
+                            </TabPanel>
+                        </Tabs>
                     </div>
-                </footer>
+                </section>
+
+                {/* Extra Sections */}
+                <section className="py-16 bg-gray-50 dark:bg-gray-800">
+                    <div className="container px-6 mx-auto">
+                        <h2 className="mb-8 text-3xl font-bold text-center text-gray-800 dark:text-gray-100">Why Choose TraceBack?</h2>
+                        <motion.div
+                            className="grid grid-cols-1 gap-6 md:grid-cols-2"
+                            initial={{ scale: 0.9 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">Secure Platform</h3>
+                                <p className="text-gray-700 dark:text-gray-200">
+                                    We ensure all information is handled securely and responsibly.
+                                </p>
+                            </div>
+                            <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">Community Driven</h3>
+                                <p className="text-gray-700 dark:text-gray-200">
+                                    A growing community committed to helping each other.
+                                </p>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
             </div>
         </div>
     );

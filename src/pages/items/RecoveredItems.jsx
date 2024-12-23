@@ -26,13 +26,13 @@ const RecoveredItems = () => {
 
     return (
         <div className="max-w-5xl mx-auto mt-8">
-            <h1 className="mb-6 text-3xl font-semibold text-center">
+            <h1 className="text-3xl font-bold text-center">
                 My Recovered Items
             </h1>
             {loading ? (
                 <Loading />
             ) : recoveredItems.length === 0 ? (
-                <p className="text-lg">No recovered items found.</p>
+                <p className="mt-4 text-center text-gray-500">No recovered items found.</p>
             ) : (
                 <div className="overflow-x-auto ">
                     <table className="table table-zebra">

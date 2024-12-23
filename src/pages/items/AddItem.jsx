@@ -5,9 +5,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useTheme from "../../hooks/useTheme.jsx";
 
 const AddItem = () => {
     const { user } = useAuth();
+    const { theme } = useTheme();
     const navigate = useNavigate();
     const [date, setDate] = useState(new Date());
 
@@ -59,77 +61,119 @@ const AddItem = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-xl p-8 mx-auto space-y-2 bg-white rounded-lg shadow-lg">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="mb-4">
-                    <label htmlFor="postType" className="block text-sm font-semibold text-gray-700">Post Type</label>
-                    <select name="postType" required className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
-                        <option value="Lost">Lost</option>
-                        <option value="Found">Found</option>
-                    </select>
-                </div>
-
-                <div className="mb-4">
-                    <label htmlFor="thumbnail" className="block text-sm font-semibold text-gray-700">Thumbnail (Image URL)</label>
-                    <input type="text" name="thumbnail" placeholder="Enter image URL" required className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" />
-                </div>
+        <div className="flex flex-col items-center justify-center min-h-screen p-12 md:flex-row">
+            <div className="md:w-1/2">
+                <h1 className="text-3xl font-bold text-center">Add Item</h1>
             </div>
 
-            <div>
-                <div className="mb-4">
-                    <label htmlFor="title" className="block text-sm font-semibold text-gray-700">Title</label>
-                    <input type="text" name="title" placeholder="Enter a title" required className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" />
+            <form
+                onSubmit={handleSubmit}
+                className={`w-full md:w-1/2 p-8 rounded-lg shadow-lg ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}
+            >
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="mb-4">
+                        <label htmlFor="postType" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Post Type</label>
+                        <select
+                            name="postType"
+                            required
+                            className={`w-full p-3 mt-1 border rounded-md focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"}`}
+                        >
+                            <option value="Lost">Lost</option>
+                            <option value="Found">Found</option>
+                        </select>
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="thumbnail" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Thumbnail (Image URL)</label>
+                        <input
+                            type="text"
+                            name="thumbnail"
+                            placeholder="Enter image URL"
+                            required
+                            className={`w-full p-3 mt-1 border rounded-md focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"}`}
+                        />
+                    </div>
                 </div>
 
-                <div className="mb-4">
-                    <label htmlFor="description" className="block text-sm font-semibold text-gray-700">Description</label>
-                    <textarea name="description" placeholder="Enter a detailed description" required className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400"></textarea>
-                </div>
-            </div>
+                <div>
+                    <div className="mb-4">
+                        <label htmlFor="title" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Enter a title"
+                            required
+                            className={`w-full p-3 mt-1 border rounded-md focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"}`}
+                        />
+                    </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="mb-4">
-                    <label htmlFor="category" className="block text-sm font-semibold text-gray-700">Category</label>
-                    <select name="category" required className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
-                        <option value="pets">Pets</option>
-                        <option value="documents">Documents</option>
-                        <option value="gadgets">Gadgets</option>
-                    </select>
-                </div>
-
-                <div className="mb-4">
-                    <label htmlFor="location" className="block text-sm font-semibold text-gray-700">Location</label>
-                    <input type="text" name="location" placeholder="Enter the location" required className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" />
-                </div>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="mb-4">
-                    <label htmlFor="dateLost" className="block text-sm font-semibold text-gray-700">Date</label>
-                    <DatePicker
-                        selected={date}
-                        onChange={(date) => setDate(date)}
-                        dateFormat="yyyy/MM/dd"
-                        className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400"
-                    />
+                    <div className="mb-4">
+                        <label htmlFor="description" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Description</label>
+                        <textarea
+                            name="description"
+                            placeholder="Enter a detailed description"
+                            required
+                            className={`w-full p-3 mt-1 border rounded-md focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"}`}
+                        />
+                    </div>
                 </div>
 
-                <div className="mb-4">
-                    <label htmlFor="contactInfo" className="block text-sm font-semibold text-gray-700">Contact Information</label>
-                    <input
-                        name="contactInfo"
-                        value={`${user.displayName} (${user.email})`}
-                        disabled
-                        className="w-full p-3 mt-1 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400"
-                    />
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="mb-4">
+                        <label htmlFor="category" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Category</label>
+                        <select
+                            name="category"
+                            required
+                            className={`w-full p-3 mt-1 border rounded-md focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"}`}
+                        >
+                            <option value="pets">Pets</option>
+                            <option value="documents">Documents</option>
+                            <option value="gadgets">Gadgets</option>
+                        </select>
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="location" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Location</label>
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="Enter the location"
+                            required
+                            className={`w-full p-3 mt-1 border rounded-md focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"}`}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <button type="submit" className="w-full py-3 mt-6 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                Add Post
-            </button>
-        </form>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="mb-4">
+                        <label htmlFor="dateLost" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Date</label>
+                        <DatePicker
+                            selected={date}
+                            onChange={(date) => setDate(date)}
+                            dateFormat="yyyy/MM/dd"
+                            className={`w-full p-3 mt-1 border rounded-md focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"}`}
+                        />
+                    </div>
 
+                    <div className="mb-4">
+                        <label htmlFor="contactInfo" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Contact Information</label>
+                        <input
+                            name="contactInfo"
+                            value={`${user.displayName} (${user.email})`}
+                            disabled
+                            className={`w-full p-3 mt-1 bg-gray-100 border rounded-md focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"}`}
+                        />
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    className={`w-full py-3 mt-6 font-semibold text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 ${theme === "dark" ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"}`}
+                >
+                    Add Post
+                </button>
+            </form>
+        </div>
 
     );
 };

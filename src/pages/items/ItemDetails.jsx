@@ -76,7 +76,9 @@ const ItemDetails = () => {
                 </p>
                 <button
                     onClick={handleModalOpen}
-                    className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
+                    className={`px-4 py-2 font-semibold text-white rounded-md focus:outline-none ${item.status === 'Recovered' ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+                        }`}
+                    disabled={item.status === 'Recovered'}
                 >
                     {item.postType === 'Lost' ? 'Found This!' : 'This is Mine!'}
                 </button>

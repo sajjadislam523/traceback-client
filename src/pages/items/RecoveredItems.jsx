@@ -8,7 +8,6 @@ const RecoveredItems = () => {
     const [recoveredItems, setRecoveredItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Fetch recovered items
     useEffect(() => {
         const fetchData = async () => {
             try {

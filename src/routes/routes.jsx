@@ -59,12 +59,13 @@ const routes = createBrowserRouter([
                 )
             },
             {
-                path: '/updateItems/:id',
+                path: '/updateItem/:id',
                 element: (
                     <PrivateRoute>
                         <UpdateItem />
                     </PrivateRoute>
-                )
+                ),
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/items/${params.id}`)
             },
             {
                 path: '/allRecovered',

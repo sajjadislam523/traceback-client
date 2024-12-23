@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Modal from 'react-modal';
 import { useLoaderData } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth.jsx';
 
 const ItemDetails = () => {
@@ -15,13 +17,43 @@ const ItemDetails = () => {
     const handleModalOpen = () => setModalOpen(true);
     const handleModalClose = () => setModalOpen(false);
 
-    const handleSubmit = () => {
-        console.log({
-            recoveredLocation,
-            recoveredDate,
-            recoveredBy: user,
-        });
-        handleModalClose();
+    const handleSubmit = async () => {
+
+        const recoveredItem = {
+            id: item._id,
+            title: item.title,
+            description: item.description,
+            category: item.category,
+            location: recoveredLocation,
+            dateRecovered: recoveredDate,
+            recoveredBy: {
+                user: user.displayName,
+                email: user.email,
+            },
+            thumbnail: item.thumbnail,
+        };
+
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/addRecoveredItem`, recoveredItem);
+
+            if (response.status === 200) {
+                await axios.patch(`${import.meta.env.VITE_API_URL}/updateItem/${item._id}`, { status: 'Recovered' });
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Item recovered successfully!',
+                })
+                handleModalClose();
+            }
+        } catch (err) {
+            console.error(err)
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Failed to update item status!',
+            })
+        }
+
     };
 
     return (
@@ -39,6 +71,9 @@ const ItemDetails = () => {
                 <p><strong>Location:</strong> {item.location}</p>
                 <p><strong>Posted by:</strong> {item.contactInfo.displayName} ({item.contactInfo.email})</p>
                 <p><strong>Date:</strong> {new Date(item.date).toLocaleDateString()}</p>
+                <p className='font-bold'>
+                    <div className={`p-4 badge ${item.status === 'Pending' ? 'badge-warning' : 'badge-success'}`}>{item.status}</div>
+                </p>
                 <button
                     onClick={handleModalOpen}
                     className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"

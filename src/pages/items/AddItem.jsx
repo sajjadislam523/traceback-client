@@ -35,6 +35,8 @@ const AddItem = () => {
                 displayName: user?.displayName,
                 email: user?.email,
             },
+            status: "Pending",
+
         };
 
         // Post request to the server

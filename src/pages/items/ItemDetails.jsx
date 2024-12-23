@@ -72,7 +72,7 @@ const ItemDetails = () => {
                 <p><strong>Posted by:</strong> {item.contactInfo.displayName} ({item.contactInfo.email})</p>
                 <p><strong>Date:</strong> {new Date(item.date).toLocaleDateString()}</p>
                 <p className='font-bold'>
-                    <div className={`p-4 badge ${item.status === 'Pending' ? 'badge-warning' : 'badge-success'}`}>{item.status}</div>
+                    <div className={`p-4 badge ${item.status === 'Pending' ? 'badge-warning text-yellow-800' : 'badge-success text-green-800'}`}>{item.status}</div>
                 </p>
                 <button
                     onClick={handleModalOpen}

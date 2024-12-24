@@ -34,7 +34,7 @@ const RecoveredItems = () => {
             ) : recoveredItems.length === 0 ? (
                 <p className="mt-4 text-center text-gray-500">No recovered items found.</p>
             ) : (
-                <div className="overflow-x-auto ">
+                <div className="mt-8 overflow-x-auto">
                     <table className="table table-zebra">
                         <thead>
                             <tr className="text-gray-700 bg-gray-200">

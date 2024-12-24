@@ -64,7 +64,7 @@ const AddItem = () => {
     };
 
     return (
-        <div className={`flex flex-col max-w-5xl gap-8 p-6 mx-auto ${theme === "dark" ? "bg-gray-900" : "bg-white"} rounded-lg shadow-lg lg:flex-row`}>
+        <div className={`flex flex-col max-w-5xl gap-8 p-6 my-8 mx-auto ${theme === "dark" ? "bg-gray-900" : "bg-white"} rounded-lg shadow-lg lg:flex-row`}>
             <div
                 className="flex flex-col items-center space-y-6 md:w-1/2"
                 initial={{ opacity: 0, y: -20 }}

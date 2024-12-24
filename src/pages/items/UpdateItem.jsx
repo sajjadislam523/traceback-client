@@ -89,7 +89,7 @@ const UpdateItem = () => {
     }
 
     return (
-        <div className={`flex flex-col max-w-5xl gap-8 p-6 mx-auto ${theme === "dark" ? "bg-gray-900" : "bg-white"} rounded-lg shadow-lg lg:flex-row`}>
+        <div className={`flex flex-col max-w-5xl gap-8 p-6 my-8 mx-auto ${theme === "dark" ? "bg-gray-900" : "bg-white"} rounded-lg shadow-lg lg:flex-row`}>
             <form onSubmit={handleSubmit} className={`w-full md:w-1/2 p-8 rounded-lg shadow-lg ${theme === "dark" ? "bg-gray-800" : "bg-white"} text-sm`}>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="mb-4">

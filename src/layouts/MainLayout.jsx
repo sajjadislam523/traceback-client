@@ -7,7 +7,7 @@ const MainLayout = () => {
     return (
         <div className='flex flex-col min-h-screen'>
             <Navbar />
-            <div className='flex-1 py-4 overflow-hidden font-poppins'>
+            <div className='flex-1 overflow-hidden font-poppins'>
                 <Outlet />
             </div>
             <Footer />

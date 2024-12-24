@@ -1,9 +1,12 @@
 import axios from "axios";
+import { motion } from "motion/react";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
 import Swal from "sweetalert2";
+import lostImage from "../../assets/lostItems/personLostThings.jpg";
 import Loading from "../../components/Loading.jsx";
 import useAuth from "../../hooks/useAuth.jsx";
 import useTheme from "../../hooks/useTheme.jsx";
@@ -86,8 +89,8 @@ const UpdateItem = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-12 md:flex-row">
-            <form onSubmit={handleSubmit} className={`w-full md:w-1/2 p-8 rounded-lg shadow-lg ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
+        <div className={`flex flex-col max-w-5xl gap-8 p-6 mx-auto ${theme === "dark" ? "bg-gray-900" : "bg-white"} rounded-lg shadow-lg lg:flex-row`}>
+            <form onSubmit={handleSubmit} className={`w-full md:w-1/2 p-8 rounded-lg shadow-lg ${theme === "dark" ? "bg-gray-800" : "bg-white"} text-sm`}>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="mb-4">
                         <label htmlFor="postType" className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>Post Type</label>
@@ -153,12 +156,53 @@ const UpdateItem = () => {
                     </div>
                 </div>
 
-                <button type="submit" className="w-full py-3 mt-6 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    Update Post
-                </button>
+                <motion.button
+                    type="submit"
+                    className={`w-full py-3 mt-6 font-semibold text-white rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400 ${theme === "dark" ? "bg-gradient-to-r from-blue-500 to-purple-600" : "bg-gradient-to-r from-blue-400 to-purple-500"
+                        }`}
+                    whileHover={{ scale: 1.1, boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.3)" }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    Add Post
+                </motion.button>
             </form>
-            <div className="md:w-1/2">
-                <h1 className="text-3xl font-bold text-center">Update Your Post's Detail</h1>
+            <div
+                className="flex flex-col items-center space-y-6 md:w-1/2"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+            >
+                <div className="min-h-[6rem] mb-4">
+
+                    <h1 className="text-4xl font-bold leading-tight text-center text-transparent bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text">
+                        <Typewriter
+                            words={[
+                                "Update Your Post's Detail",
+                                "Modify and Improve Your Listings",
+                                "Make Your Post Stand Out",
+                                "Edit and Customize Your Information",
+                                "Keep Your Post Accurate and Up-to-Date"
+                            ]}
+                            loop={false}
+                            cursor
+                            cursorStyle="|"
+                            typeSpeed={70}
+                            deleteSpeed={50}
+                            delaySpeed={1000}
+                        />
+                    </h1>
+                </div>
+                <p className="text-lg text-start dark:text-white">
+                    Keep your post up-to-date with the latest information. Whether you want to edit your item details, improve the description, or change the image, this section allows you to make updates so your listing stays fresh and accurate for other users.
+                </p>
+                <motion.img
+                    src={lostImage}
+                    alt="Lost suitcase illustration"
+                    className="object-cover w-full h-auto transition-transform duration-300 transform rounded-lg shadow-md hover:scale-105"
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
+                />
             </div>
         </div>
     );

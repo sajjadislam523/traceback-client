@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout.jsx';
 import Login from '../pages/Auth/Login.jsx';
 import Register from '../pages/Auth/Register.jsx';
+import ErrorPage from '../pages/error/ErrorPage.jsx';
 import Home from '../pages/Home.jsx';
 import AddItem from '../pages/items/AddItem.jsx';
 import ItemDetails from '../pages/items/ItemDetails.jsx';
@@ -15,6 +16,7 @@ const routes = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/',

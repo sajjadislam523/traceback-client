@@ -6,7 +6,11 @@ export default {
   ],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'errorBg': "url('assets/errorImg/boyLost.jpg')",
+      },
+    },
     fontFamily: {
       "poppins": ["Poppins", "serif"],
     },

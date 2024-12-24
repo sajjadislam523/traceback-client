@@ -45,8 +45,8 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, async currentUser => {
             if (currentUser?.email) {
                 setUser(currentUser)
-                const user = { email: currentUser.email }
-                const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { user }, { withCredentials: true })
+                const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,
+                    { email: currentUser?.email }, { withCredentials: true })
                 console.log(data)
             } else {
                 setUser(currentUser)

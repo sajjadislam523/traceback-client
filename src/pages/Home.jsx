@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Helmet } from 'react-helmet-async';
 import { Link } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import documentsFound from "../assets/homeCard/documentsFound.jpg";
 import dogFound from "../assets/homeCard/dogFound.jpg";
 import lostWallet from "../assets/homeCard/lostWallet.jpg";
@@ -32,26 +37,69 @@ const Home = () => {
                 <div className="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-200">
                     {/* Hero Section */}
                     <section className="relative py-20 text-white bg-blue-500 dark:bg-blue-800">
-                        <div className="container px-6 mx-auto text-center">
-                            <h1 className="mb-6 text-4xl font-bold md:text-5xl">Welcome to TraceBack</h1>
-                            <p className="mb-8 text-lg md:text-xl">
-                                Helping you reconnect with lost and found items effortlessly.
-                            </p>
-                            <div className="flex flex-wrap justify-center gap-4">
-                                <Link
-                                    to="/addItems"
-                                    className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
-                                >
-                                    Report Lost Item
-                                </Link>
-                                <Link
-                                    to="/allItems"
-                                    className="px-6 py-3 font-semibold bg-blue-700 rounded-lg shadow-md dark:bg-blue-900 hover:bg-blue-800 dark:hover:bg-blue-600"
-                                >
-                                    Find Lost Item
-                                </Link>
-                            </div>
-                        </div>
+                        <Swiper
+                            modules={[Pagination, Autoplay]}
+                            spaceBetween={30}
+                            slidesPerView={1}
+                            autoplay={{ delay: 5000, disableOnInteraction: false }}
+                            pagination={{ clickable: true }}
+                            className="container px-6 mx-auto text-center"
+                        >
+                            <SwiperSlide>
+                                <div>
+                                    <h1 className="mb-6 text-4xl font-bold md:text-5xl">Welcome to TraceBack</h1>
+                                    <p className="mb-8 text-lg md:text-xl">
+                                        Helping you reconnect with lost and found items effortlessly.
+                                    </p>
+                                    <div className="flex flex-wrap justify-center gap-4">
+                                        <Link
+                                            to="/addItems"
+                                            className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
+                                        >
+                                            Report Lost Item
+                                        </Link>
+                                        <Link
+                                            to="/allItems"
+                                            className="px-6 py-3 font-semibold bg-blue-700 rounded-lg shadow-md dark:bg-blue-900 hover:bg-blue-800 dark:hover:bg-blue-600"
+                                        >
+                                            Find Lost Item
+                                        </Link>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div>
+                                    <h1 className="mb-6 text-4xl font-bold md:text-5xl">Find Items Quickly</h1>
+                                    <p className="mb-8 text-lg md:text-xl">
+                                        Search our extensive database for lost items and reconnect with their owners.
+                                    </p>
+                                    <div className="flex flex-wrap justify-center gap-4">
+                                        <Link
+                                            to="/search"
+                                            className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
+                                        >
+                                            Start Searching
+                                        </Link>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div>
+                                    <h1 className="mb-6 text-4xl font-bold md:text-5xl">Join the Community</h1>
+                                    <p className="mb-8 text-lg md:text-xl">
+                                        Be part of a growing community dedicated to helping others find their belongings.
+                                    </p>
+                                    <div className="flex flex-wrap justify-center gap-4">
+                                        <Link
+                                            to="/community"
+                                            className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
+                                        >
+                                            Learn More
+                                        </Link>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        </Swiper>
                     </section>
 
                     {/* Latest Find & Lost Items Section */}

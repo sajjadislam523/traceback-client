@@ -1,10 +1,8 @@
 import axios from "axios";
-import { motion } from "framer-motion"; // Import framer motion
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Helmet } from 'react-helmet-async';
 import { Link } from "react-router-dom";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import "react-tabs/style/react-tabs.css"; // Import default styles for react-tabs
 import documentsFound from "../assets/homeCard/documentsFound.jpg";
 import dogFound from "../assets/homeCard/dogFound.jpg";
 import lostWallet from "../assets/homeCard/lostWallet.jpg";
@@ -146,78 +144,6 @@ const Home = () => {
                                     </p>
                                 </div>
                             </motion.div>
-                        </div>
-                    </section>
-
-                    {/* Popular Categories Section with React Tabs */}
-                    <section className="py-16 dark:bg-gray-900">
-                        <div className="container px-6 mx-auto">
-                            <h2 className="mb-8 text-3xl font-bold text-center text-gray-800 dark:text-gray-100">Popular Categories</h2>
-                            <Tabs>
-                                <TabList className="flex justify-center gap-8">
-                                    <Tab
-                                        className={({ selected }) =>
-                                            `px-4 py-2 border-b-2 ${selected
-                                                ? "border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-100"
-                                                : "border-transparent text-gray-600 dark:text-gray-400"
-                                            }`
-                                        }
-                                    >
-                                        Electronics
-                                    </Tab>
-                                    <Tab
-                                        className={({ selected }) =>
-                                            `px-4 py-2 border-b-2 ${selected
-                                                ? "border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-100"
-                                                : "border-transparent text-gray-600 dark:text-gray-400"
-                                            }`
-                                        }
-                                    >
-                                        Documents
-                                    </Tab>
-                                    <Tab
-                                        className={({ selected }) =>
-                                            `px-4 py-2 border-b-2 ${selected
-                                                ? "border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-100"
-                                                : "border-transparent text-gray-600 dark:text-gray-400"
-                                            }`
-                                        }
-                                    >
-                                        Accessories
-                                    </Tab>
-                                    <Tab
-                                        className={({ selected }) =>
-                                            `px-4 py-2 border-b-2 ${selected
-                                                ? "border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-100"
-                                                : "border-transparent text-gray-600 dark:text-gray-400"
-                                            }`
-                                        }
-                                    >
-                                        Others
-                                    </Tab>
-                                </TabList>
-
-                                <TabPanel>
-                                    <p className="text-center text-gray-700 dark:text-gray-300">
-                                        Find and report electronic items like laptops, phones, and more.
-                                    </p>
-                                </TabPanel>
-                                <TabPanel>
-                                    <p className="text-center text-gray-700 dark:text-gray-300">
-                                        Manage lost or found important documents like passports or IDs.
-                                    </p>
-                                </TabPanel>
-                                <TabPanel>
-                                    <p className="text-center text-gray-700 dark:text-gray-300">
-                                        Search for accessories like watches, jewelry, and more.
-                                    </p>
-                                </TabPanel>
-                                <TabPanel>
-                                    <p className="text-center text-gray-700 dark:text-gray-300">
-                                        Discover and report other lost or found items.
-                                    </p>
-                                </TabPanel>
-                            </Tabs>
                         </div>
                     </section>
 

@@ -56,6 +56,9 @@ const Footer = () => {
                     ))}
                 </div>
             </div>
+            <div className="py-4 text-center">
+                <p>&copy; {new Date().getFullYear()} TraceBack. All Rights Reserved.</p>
+            </div>
         </footer>
 
 

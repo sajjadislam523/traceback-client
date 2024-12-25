@@ -10,6 +10,22 @@ const Navbar = () => {
     const links = (
         <div className="flex flex-col gap-2 text-sm">
             <NavLink
+                to="/"
+                className={({ isActive }) =>
+                    `font-medium ${isActive ? "underline text-indigo-600 dark:text-indigo-400" : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"} md:hidden`
+                }
+            >
+                Home
+            </NavLink>
+            <NavLink
+                to="/allItems"
+                className={({ isActive }) =>
+                    `font-medium ${isActive ? "underline text-indigo-600 dark:text-indigo-400" : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"} md:hidden`
+                }
+            >
+                Lost & Found
+            </NavLink>
+            <NavLink
                 to="/addItems"
                 className={({ isActive }) =>
                     isActive
@@ -34,10 +50,18 @@ const Navbar = () => {
                 className={({ isActive }) =>
                     isActive
                         ? "font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
-                        : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"
+                        : "hover:text-indigo-500 text-gray-600 dark:text-gray-100"
                 }
             >
                 Recovered Items
+            </NavLink>
+            <NavLink
+                to="/blogPost"
+                className={({ isActive }) =>
+                    `font-medium ${isActive ? "underline text-indigo-600 dark:text-indigo-400" : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"} md:hidden`
+                }
+            >
+                Blog
             </NavLink>
         </div>
     );
@@ -73,12 +97,18 @@ const Navbar = () => {
                 <NavLink
                     to="/allItems"
                     className={({ isActive }) =>
-                        isActive
-                            ? "font-medium underline text-indigo-600 dark:text-indigo-400"
-                            : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"
+                        `font-medium ${isActive ? "underline text-indigo-600 dark:text-indigo-400" : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"} hidden lg:block`
                     }
                 >
                     Lost & Found
+                </NavLink>
+                <NavLink
+                    to="/blogPost"
+                    className={({ isActive }) =>
+                        `font-medium ${isActive ? "underline text-indigo-600 dark:text-indigo-400" : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"} hidden lg:block`
+                    }
+                >
+                    Blog
                 </NavLink>
             </div>
 

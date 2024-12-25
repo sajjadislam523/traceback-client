@@ -30,7 +30,7 @@ const Footer = () => {
                                 <ul className="space-y-1">
                                     {section.links.map((link, index) => (
                                         <li key={index}>
-                                            <a href="#" className="hover:text-violet-600 transition">{link}</a>
+                                            <a href="#" className="transition hover:text-violet-600">{link}</a>
                                         </li>
                                     ))}
                                 </ul>
@@ -57,6 +57,11 @@ const Footer = () => {
                     ))}
                 </div>
             </div>
+            <footer className="py-4 text-white bg-blue-600">
+                <div className="container mx-auto text-center">
+                    <p>&copy; 2024 TraceBack. All rights reserved.</p>
+                </div>
+            </footer>
         </footer>
 
     );

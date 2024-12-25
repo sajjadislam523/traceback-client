@@ -2,6 +2,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Helmet } from 'react-helmet-async';
+import { FaHandshake, FaRegNewspaper, FaSearch } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,6 +12,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import documentsFound from "../assets/homeCard/documentsFound.jpg";
 import dogFound from "../assets/homeCard/dogFound.jpg";
 import lostWallet from "../assets/homeCard/lostWallet.jpg";
+import img1 from "../assets/lostItems/lostBag.jpg";
+import img2 from "../assets/lostItems/lostDog.jpg";
+import img3 from "../assets/lostItems/lostGadget.jpg";
 import ItemCard from "../components/ItemCard.jsx";
 import useTheme from "../hooks/useTheme.jsx";
 
@@ -36,7 +40,7 @@ const Home = () => {
             <div className={theme === "dark" ? "dark" : ""}>
                 <div className="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-200">
                     {/* Hero Section */}
-                    <section className="relative py-20 text-white bg-blue-500 dark:bg-blue-800">
+                    <section className="relative p-4 text-white dark:bg-gray-700">
                         <Swiper
                             modules={[Pagination, Autoplay]}
                             spaceBetween={30}
@@ -45,62 +49,98 @@ const Home = () => {
                             pagination={{ clickable: true }}
                             className="container px-6 mx-auto text-center"
                         >
+                            {/* Slide 1 */}
                             <SwiperSlide>
-                                <div>
-                                    <h1 className="mb-6 text-4xl font-bold md:text-5xl">Welcome to TraceBack</h1>
-                                    <p className="mb-8 text-lg md:text-xl">
-                                        Helping you reconnect with lost and found items effortlessly.
-                                    </p>
-                                    <div className="flex flex-wrap justify-center gap-4">
-                                        <Link
-                                            to="/addItems"
-                                            className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
-                                        >
-                                            Report Lost Item
-                                        </Link>
-                                        <Link
-                                            to="/allItems"
-                                            className="px-6 py-3 font-semibold bg-blue-700 rounded-lg shadow-md dark:bg-blue-900 hover:bg-blue-800 dark:hover:bg-blue-600"
-                                        >
-                                            Find Lost Item
-                                        </Link>
+                                <div className="relative h-[300px] md:h-[400px] lg:h-[500px]">
+                                    <img
+                                        src={img1}
+                                        alt="Welcome to TraceBack"
+                                        className="absolute inset-0 object-cover w-full h-full rounded-lg"
+                                    />
+                                    {/* Black overlay */}
+                                    <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg"></div>
+                                    {/* Text content */}
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
+                                        <h1 className="mb-6 text-2xl font-bold md:text-4xl lg:text-5xl">Welcome to TraceBack</h1>
+                                        <p className="mb-8 text-sm md:text-lg lg:text-xl">
+                                            Helping you reconnect with lost and found items effortlessly.
+                                        </p>
+                                        <div className="flex flex-wrap justify-center gap-4">
+                                            <Link
+                                                to="/addItems"
+                                                className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
+                                            >
+                                                Report Lost Item
+                                            </Link>
+                                            <Link
+                                                to="/allItems"
+                                                className="px-6 py-3 font-semibold bg-blue-700 rounded-lg shadow-md dark:bg-blue-900 hover:bg-blue-800 dark:hover:bg-blue-600"
+                                            >
+                                                Find Lost Item
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </SwiperSlide>
+
+                            {/* Slide 2 */}
                             <SwiperSlide>
-                                <div>
-                                    <h1 className="mb-6 text-4xl font-bold md:text-5xl">Find Items Quickly</h1>
-                                    <p className="mb-8 text-lg md:text-xl">
-                                        Search our extensive database for lost items and reconnect with their owners.
-                                    </p>
-                                    <div className="flex flex-wrap justify-center gap-4">
-                                        <Link
-                                            to="/search"
-                                            className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
-                                        >
-                                            Start Searching
-                                        </Link>
+                                <div className="relative h-[300px] md:h-[400px] lg:h-[500px]">
+                                    <img
+                                        src={img2}
+                                        alt="Find Items Quickly"
+                                        className="absolute inset-0 object-cover w-full h-full rounded-lg"
+                                    />
+                                    {/* Black overlay */}
+                                    <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg"></div>
+                                    {/* Text content */}
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
+                                        <h1 className="mb-6 text-2xl font-bold md:text-4xl lg:text-5xl">Find Items Quickly</h1>
+                                        <p className="mb-8 text-sm md:text-lg lg:text-xl">
+                                            Search our extensive database for lost items and reconnect with their owners.
+                                        </p>
+                                        <div className="flex flex-wrap justify-center gap-4">
+                                            <Link
+                                                to="/allItems"
+                                                className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
+                                            >
+                                                Start Searching
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </SwiperSlide>
+
+                            {/* Slide 3 */}
                             <SwiperSlide>
-                                <div>
-                                    <h1 className="mb-6 text-4xl font-bold md:text-5xl">Join the Community</h1>
-                                    <p className="mb-8 text-lg md:text-xl">
-                                        Be part of a growing community dedicated to helping others find their belongings.
-                                    </p>
-                                    <div className="flex flex-wrap justify-center gap-4">
-                                        <Link
-                                            to="/community"
-                                            className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
-                                        >
-                                            Learn More
-                                        </Link>
+                                <div className="relative h-[300px] md:h-[400px] lg:h-[500px]">
+                                    <img
+                                        src={img3}
+                                        alt="Join the Community"
+                                        className="absolute inset-0 object-cover w-full h-full rounded-lg"
+                                    />
+                                    {/* Black overlay */}
+                                    <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg"></div>
+                                    {/* Text content */}
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
+                                        <h1 className="mb-6 text-2xl font-bold md:text-4xl lg:text-5xl">Join the Community</h1>
+                                        <p className="mb-8 text-sm md:text-lg lg:text-xl">
+                                            Be part of a growing community dedicated to helping others find their belongings.
+                                        </p>
+                                        <div className="flex flex-wrap justify-center gap-4">
+                                            <Link
+                                                to="/blogPost"
+                                                className="px-6 py-3 font-semibold text-blue-500 bg-white rounded-lg shadow-md dark:text-blue-800 hover:bg-blue-100 dark:hover:bg-gray-300"
+                                            >
+                                                Learn More
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </SwiperSlide>
                         </Swiper>
                     </section>
+
 
                     {/* Latest Find & Lost Items Section */}
                     <section className="py-16 bg-gray-100 dark:bg-gray-800">
@@ -138,24 +178,45 @@ const Home = () => {
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    <div className="flex justify-center mb-4">
+                                        <FaRegNewspaper className="text-4xl text-blue-500 dark:text-blue-300" />
+                                    </div>
                                     <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">1. Report</h3>
                                     <p className="text-gray-700 dark:text-gray-200">
                                         Provide details about the lost or found item on our platform.
                                     </p>
-                                </div>
-                                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                </motion.div>
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    <div className="flex justify-center mb-4">
+                                        <FaSearch className="text-4xl text-blue-500 dark:text-blue-300" />
+                                    </div>
                                     <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">2. Search</h3>
                                     <p className="text-gray-700 dark:text-gray-200">
                                         Search through our database to find matching items.
                                     </p>
-                                </div>
-                                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                </motion.div>
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    <div className="flex justify-center mb-4">
+                                        <FaHandshake className="text-4xl text-blue-500 dark:text-blue-300" />
+                                    </div>
                                     <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">3. Connect</h3>
                                     <p className="text-gray-700 dark:text-gray-200">
                                         Contact the person who reported the item for verification.
                                     </p>
-                                </div>
+                                </motion.div>
                             </motion.div>
                         </div>
                     </section>
@@ -170,27 +231,41 @@ const Home = () => {
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
                                     <img src={lostWallet} alt="Story 1" className="mb-4 rounded-lg" />
                                     <h3 className="mb-2 text-xl font-semibold dark:text-gray-100">Lost Wallet Found</h3>
                                     <p className="text-gray-600 dark:text-gray-300">
                                         "Thanks to TraceBack, I was able to find my lost wallet in just two days!"
                                     </p>
-                                </div>
-                                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                </motion.div>
+
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
                                     <img src={dogFound} alt="Story 2" className="mb-4 rounded-lg" />
                                     <h3 className="mb-2 text-xl font-semibold dark:text-gray-100">Found Dog Reunited</h3>
                                     <p className="text-gray-600 dark:text-gray-300">
                                         "The platform made it easy to connect with the dog's owner."
                                     </p>
-                                </div>
-                                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                </motion.div>
+
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
                                     <img src={documentsFound} alt="Story 3" className="mb-4 rounded-lg" />
                                     <h3 className="mb-2 text-xl font-semibold dark:text-gray-100">Important Documents</h3>
                                     <p className="text-gray-600 dark:text-gray-300">
                                         "I was worried I would never find my documents, but TraceBack saved the day."
                                     </p>
-                                </div>
+                                </motion.div>
                             </motion.div>
                         </div>
                     </section>
@@ -200,23 +275,80 @@ const Home = () => {
                         <div className="container px-6 mx-auto">
                             <h2 className="mb-8 text-3xl font-bold text-center text-gray-800 dark:text-gray-100">Why Choose TraceBack?</h2>
                             <motion.div
-                                className="grid grid-cols-1 gap-6 md:grid-cols-2"
-                                initial={{ scale: 0.9 }}
-                                animate={{ scale: 1 }}
-                                transition={{ duration: 0.5 }}
+                                className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8 }}
                             >
-                                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
                                     <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">Secure Platform</h3>
                                     <p className="text-gray-700 dark:text-gray-200">
                                         We ensure all information is handled securely and responsibly.
                                     </p>
-                                </div>
-                                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                                </motion.div>
+
+
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
                                     <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">Community Driven</h3>
                                     <p className="text-gray-700 dark:text-gray-200">
                                         A growing community committed to helping each other.
                                     </p>
-                                </div>
+                                </motion.div>
+
+
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">Easy to Use</h3>
+                                    <p className="text-gray-700 dark:text-gray-200">
+                                        Our platform is designed to be user-friendly for everyone.
+                                    </p>
+                                </motion.div>
+
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">24/7 Support</h3>
+                                    <p className="text-gray-700 dark:text-gray-200">
+                                        Our dedicated team is available to assist you at any time.
+                                    </p>
+                                </motion.div>
+
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">Global Reach</h3>
+                                    <p className="text-gray-700 dark:text-gray-200">
+                                        We connect people from all over the world to help with lost and found items.
+                                    </p>
+                                </motion.div>
+
+
+                                <motion.div
+                                    className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-700"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    <h3 className="mb-4 text-xl font-semibold text-blue-500 dark:text-blue-300">Free to Use</h3>
+                                    <p className="text-gray-700 dark:text-gray-200">
+                                        TraceBack is completely free for anyone to use.
+                                    </p>
+                                </motion.div>
                             </motion.div>
                         </div>
                     </section>

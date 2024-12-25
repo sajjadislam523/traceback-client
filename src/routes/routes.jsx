@@ -5,6 +5,7 @@ import Register from '../pages/Auth/Register.jsx';
 import ErrorPage from '../pages/error/ErrorPage.jsx';
 import Home from '../pages/Home.jsx';
 import AddItem from '../pages/items/AddItem.jsx';
+import BlogPage from '../pages/items/BlogPage.jsx';
 import ItemDetails from '../pages/items/ItemDetails.jsx';
 import LostAndFound from '../pages/items/LostAndFound.jsx';
 import MyItems from '../pages/items/MyItems.jsx';
@@ -76,6 +77,10 @@ const routes = createBrowserRouter([
                         <RecoveredItems />
                     </PrivateRoute>
                 )
+            },
+            {
+                path: '/blogPost',
+                element: <BlogPage />
             },
         ]
 

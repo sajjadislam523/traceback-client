@@ -24,6 +24,15 @@ const ItemDetails = () => {
 
     const handleSubmit = async () => {
 
+        if (item.contactInfo.email === user.email) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Action Not Allowed',
+                text: 'You cannot recover an item you created.',
+            });
+            return;
+        }
+
         const recoveredItem = {
             id: item._id,
             title: item.title,

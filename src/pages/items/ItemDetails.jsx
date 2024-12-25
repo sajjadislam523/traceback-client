@@ -39,10 +39,12 @@ const ItemDetails = () => {
         };
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/addRecoveredItem`, recoveredItem);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/addRecoveredItem`, recoveredItem, { withCredentials: true });
 
             if (response.status === 200) {
-                await axios.patch(`${import.meta.env.VITE_API_URL}/updateItem/${item._id}`, { status: 'Recovered' });
+                await axios.patch(`${import.meta.env.VITE_API_URL}/updateItem/${item._id}`, { status: 'Recovered' },
+                    { withCredentials: true }
+                );
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',

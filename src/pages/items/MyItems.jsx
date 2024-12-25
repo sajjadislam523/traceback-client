@@ -13,7 +13,9 @@ const MyItems = () => {
     const [items, setItems] = useState([])
     const fetchItems = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/myItems/${user.email}`)
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/myItems/${user.email}`,
+                { withCredentials: true }
+            )
             setItems(res.data)
         } catch (err) {
             console.error(err)
@@ -41,7 +43,8 @@ const MyItems = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`${import.meta.env.VITE_API_URL}/item/${id}`);
+                await axios.delete(`${import.meta.env.VITE_API_URL}/item/${id}`,
+                    { withCredentials: true });
                 setItems(items.filter((item) => item._id !== id));
                 Swal.fire(
                     'Deleted!',

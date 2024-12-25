@@ -47,7 +47,8 @@ const AddItem = () => {
 
         // Post request to the server
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/addItem`, formData);
+            await axios.post(`${import.meta.env.VITE_API_URL}/addItem`, formData,
+                { withCredentials: true });
             form.reset();
             Swal.fire({
                 icon: "success",
@@ -213,6 +214,7 @@ const AddItem = () => {
                                 <option value="pets">Pets</option>
                                 <option value="documents">Documents</option>
                                 <option value="gadgets">Gadgets</option>
+                                <option value="gadgets">Accessories</option>
                             </select>
                         </div>
 

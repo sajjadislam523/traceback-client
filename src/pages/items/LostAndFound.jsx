@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import ItemCard from '../../components/ItemCard.jsx';
+import Loading from '../../components/Loading.jsx';
+import useAuth from '../../hooks/useAuth.jsx';
 import useTheme from '../../hooks/useTheme.jsx';
 
 const LostAndFound = () => {
@@ -9,11 +11,14 @@ const LostAndFound = () => {
     const [items, setItems] = useState([]);
     const [search, setSearch] = useState('');
     const { theme } = useTheme();
+    const { loading, setLoading } = useAuth();
 
     useEffect(() => {
         const fetchItems = async () => {
+            setLoading(true);
             const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/allItems?search=${search}`);
             setItems(data);
+            setLoading(false);
         }
         fetchItems();
     }, [search]);
@@ -53,14 +58,19 @@ const LostAndFound = () => {
                 </div>
 
                 {/* Items Grid */}
-                <div
-                    className={`grid grid-cols-1 gap-6 px-12 py-6 md:grid-cols-2 lg:grid-cols-4 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
-                        }`}
-                >
-                    {items.map((item) => (
-                        <ItemCard key={item._id} item={item} />
-                    ))}
-                </div>
+                {loading ? (
+                    <Loading />
+
+                ) : (
+                    <div
+                        className={`grid grid-cols-1 gap-6 px-12 py-6 md:grid-cols-2 lg:grid-cols-4 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+                            }`}
+                    >
+                        {items.map((item) => (
+                            <ItemCard key={item._id} item={item} />
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     );

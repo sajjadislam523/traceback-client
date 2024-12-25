@@ -17,7 +17,8 @@ const RecoveredItems = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `${import.meta.env.VITE_API_URL}/myRecoveredItems/${user.email}`
+                    `${import.meta.env.VITE_API_URL}/myRecoveredItems/${user.email}`,
+                    { withCredentials: true }
                 );
                 setRecoveredItems(response.data);
             } catch (error) {

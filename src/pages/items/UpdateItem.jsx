@@ -70,7 +70,7 @@ const UpdateItem = () => {
 
         // Update request to the server
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/items/${id}`, updatedData);
+            await axios.put(`${import.meta.env.VITE_API_URL}/items/${id}`, updatedData, { withCredentials: true });
             Swal.fire({
                 icon: "success",
                 title: "Success!",

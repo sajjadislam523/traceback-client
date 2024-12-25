@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 const ItemCard = ({ item }) => {
     return (
         <div className="flex flex-col bg-white rounded-md shadow-md dark:bg-gray-800 dark:text-gray-50">
@@ -21,9 +21,17 @@ const ItemCard = ({ item }) => {
                     <p><strong>Status:</strong> {item.status}</p>
                 </div>
 
-                <Link to={`/items/${item._id}`} type="button" className="flex items-center justify-center w-full p-3 mt-4 font-semibold tracking-wide text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none">
-                    View Details
-                </Link>
+                <motion.div
+                    whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <Link
+                        to={`/items/${item._id}`}
+                        className="flex items-center justify-center w-full p-3 mt-4 font-semibold tracking-wide text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
+                    >
+                        View Details
+                    </Link>
+                </motion.div>
             </div>
         </div>
     );

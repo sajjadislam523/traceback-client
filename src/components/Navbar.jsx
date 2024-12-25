@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import logo from '../assets/logo/brandLogo.png';
 import useAuth from "../hooks/useAuth.jsx";
 import useTheme from "../hooks/useTheme.jsx";
 
@@ -72,7 +73,8 @@ const Navbar = () => {
                 }`}
         >
             {/* Left Section */}
-            <div className="flex-1">
+            <div className="flex-1 gap-2">
+                <img src={logo} alt="" className="w-10" />
                 <Link
                     to="/"
                     className={`text-2xl font-bold transition-colors duration-300 ${theme === "dark" ? "text-indigo-400" : "text-indigo-600 hover:text-indigo-700"

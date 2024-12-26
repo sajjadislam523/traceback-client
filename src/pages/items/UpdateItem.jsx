@@ -170,7 +170,7 @@ const UpdateItem = () => {
                         whileHover={{ scale: 1.1, boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.3)" }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        Add Post
+                        Update Post
                     </motion.button>
                 </form>
                 <div

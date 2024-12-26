@@ -131,6 +131,7 @@ const UpdateItem = () => {
                                 <option value="pets">Pets</option>
                                 <option value="documents">Documents</option>
                                 <option value="gadgets">Gadgets</option>
+                                <option value="gadgets">Accessories</option>
                             </select>
                         </div>
 

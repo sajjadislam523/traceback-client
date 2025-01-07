@@ -49,3 +49,59 @@ Visit the live website here:
 -   **sweetalert2**: Creates visually appealing alerts and notifications.
 -   **swiper**: Adds swipeable sliders for showcasing posts.
 -   **framer-motion**: Creates smooth animations for interactive user experiences.
+
+---
+
+## 🛠️ Installation Process
+
+To run the project locally, follow these steps:
+
+1. **Clone the Repository**
+
+    ```bash
+    git clone https://github.com/sajjadislam523/traceback-client.git
+    ```
+
+2. **Navigate to the Project Directory**
+
+    ```bash
+    cd traceback
+    ```
+
+3. **Install Dependencies**  
+   Install all the required npm packages using:
+
+    ```bash
+    npm install
+    ```
+
+4. **Set Up Firebase Configuration**
+
+    - Go to your [Firebase Console](https://console.firebase.google.com/).
+    - Create a new Firebase project.
+    - Add your project's Firebase configuration to a `.env` file in the root directory:
+
+        ```bash
+        REACT_APP_FIREBASE_API_KEY=your-api-key
+        REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+        REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+        REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+        REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+        REACT_APP_FIREBASE_APP_ID=your-app-id
+        ```
+
+5. **Start the Development Server**  
+   Run the following command to start the development server:
+
+    ```bash
+    npm start
+    ```
+
+    The app will be available at `http://localhost:3000`.
+
+6. **Build for Production** (Optional)  
+   To create a production-ready build, use:
+    ```bash
+    npm run build
+    ```
+    This will generate a `build` folder with optimized files for deployment.

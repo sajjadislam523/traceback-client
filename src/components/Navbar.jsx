@@ -187,9 +187,9 @@ const Navbar = () => {
             </div>
 
             {/* Right Section for desktop */}
-            <div className="items-center hidden gap-4 ml-4 lg:flex">
+            <div className="items-center gap-4 ml-4 lg:flex">
                 {/* Theme Toggle */}
-                <div className="flex items-center gap-2">
+                <div className="items-center hidden gap-2 lg:flex">
                     <label
                         htmlFor="Toggle1"
                         className="inline-flex items-center space-x-4 cursor-pointer"
@@ -210,6 +210,7 @@ const Navbar = () => {
 
                 {user ? (
                     <div className="dropdown dropdown-end">
+                        {/* Avatar Button */}
                         <div
                             tabIndex={0}
                             role="button"
@@ -221,27 +222,41 @@ const Navbar = () => {
                         >
                             <div className="w-10 rounded-full">
                                 <img
-                                    alt={user?.displayName}
-                                    src={user?.photoURL}
+                                    alt={user?.displayName || "User Avatar"}
+                                    src={
+                                        user?.photoURL || "/default-avatar.png"
+                                    }
                                 />
                             </div>
                         </div>
+
+                        {/* Dropdown Content */}
                         <div
                             tabIndex={0}
-                            className={`z-10 p-4 mt-3 shadow-md dropdown-content menu menu-sm box w-52
-        ${
-            theme === "dark"
-                ? "bg-gray-800 text-gray-100 border border-gray-700"
-                : "bg-white text-gray-900 border border-gray-200"
-        }
-    `}
+                            className={`z-10 mt-3 shadow-md hidden lg:block dropdown-content menu menu-sm box w-52 ${
+                                theme === "dark"
+                                    ? "bg-gray-800 text-gray-100 border border-gray-700"
+                                    : "bg-white text-gray-900 border border-gray-200"
+                            }`}
                         >
+                            {/* User Details */}
+                            <div className="px-4 py-2">
+                                <p className="font-semibold">
+                                    {user.displayName}
+                                </p>
+                                <p className="text-sm text-gray-500">
+                                    {user.email}
+                                </p>
+                            </div>
+                            <hr className="my-2 border-gray-300 dark:border-gray-600" />
+
+                            {/* Logout Button */}
                             <button
                                 onClick={logOut}
-                                className={`mt-4 btn btn-sm hover:bg-red-600 ${
+                                className={`mt-2 btn btn-sm w-full ${
                                     theme === "dark"
-                                        ? "bg-red-500 text-gray-100"
-                                        : "bg-red-500 text-white"
+                                        ? "bg-red-500 text-gray-100 hover:bg-red-600"
+                                        : "bg-red-500 text-white hover:bg-red-600"
                                 }`}
                             >
                                 Logout

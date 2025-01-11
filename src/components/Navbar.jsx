@@ -89,7 +89,7 @@ const Navbar = () => {
 
     return (
         <div
-            className={`px-6 py-4 sticky top-0 z-50 shadow-lg navbar transition-colors duration-300 ${
+            className={`px-6 py-4 sticky top-0 z-50 shadow-lg navbar transition-colors duration-300  ${
                 theme === "dark"
                     ? "bg-gray-900 text-gray-100"
                     : "bg-gray-100 text-gray-900"
@@ -117,7 +117,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4 ml-4 lg:hidden">
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className={`text-gray-600 dark:text-gray-100 focus:outline-none transition-transform duration-300 ease-in-out ${
+                    className={`text-gray-600 dark:text-gray-100 z-20 focus:outline-none transition-transform duration-300 ease-in-out ${
                         isMenuOpen ? "rotate-90" : ""
                     }`}
                 >
@@ -127,11 +127,11 @@ const Navbar = () => {
 
             {/* Mobile Dropdown Menu */}
             <div
-                className={`absolute right-0 z-10 w-full p-4 text-center flex flex-col shadow-lg lg:hidden top-16 transition-all duration-300 ease-in-out 
+                className={`absolute right-0 z-10 w-full p-4 text-center flex flex-col shadow-lg lg:hidden transition-all duration-300 ease-in-out 
         ${
             isMenuOpen
-                ? "translate-x-0 opacity-100"
-                : "translate-x-full opacity-0"
+                ? "translate-y-0 top-16 opacity-100"
+                : "-translate-y-full top-15 opacity-100"
         } 
         ${
             theme === "dark"
@@ -266,7 +266,7 @@ const Navbar = () => {
                 ) : (
                     <Link
                         to="/login"
-                        className="text-white bg-indigo-600 btn btn-sm hover:bg-indigo-700"
+                        className="hidden text-white bg-indigo-600 lg:flex btn btn-sm hover:bg-indigo-700"
                     >
                         Login
                     </Link>

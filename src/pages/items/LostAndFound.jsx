@@ -28,13 +28,17 @@ const LostAndFound = () => {
     const sortedItems = useMemo(() => {
         let sorted = [...items];
         if (sort === "date_desc") {
-            sorted.sort(
-                (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-            );
+            sorted.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateB - dateA;
+            });
         } else if (sort === "date_asc") {
-            sorted.sort(
-                (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-            );
+            sorted.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateA - dateB;
+            });
         } else if (sort === "title_asc") {
             sorted.sort((a, b) => a.title.localeCompare(b.title));
         } else if (sort === "title_desc") {

@@ -4,50 +4,69 @@ import { Link } from "react-router-dom";
 
 const ItemCard = ({ item }) => {
     return (
-        <div className="flex flex-col overflow-hidden transition-shadow duration-300 bg-white rounded-lg shadow-lg dark:bg-gray-700 dark:text-gray-50 hover:shadow-xl">
-            <img
-                src={item.thumbnail}
-                alt="Item Thumbnail"
-                className="object-cover object-center w-full rounded-t-lg h-72 md:h-56 lg:h-64 dark:bg-gray-500"
-            />
-            <div className="flex flex-col justify-between flex-grow p-6 space-y-4">
-                <div className="space-y-2">
-                    <h2 className="text-2xl font-semibold text-gray-800 truncate dark:text-gray-100">
+        <motion.div
+            className="flex flex-col overflow-hidden transition-shadow duration-300 bg-white rounded-lg shadow-md group dark:bg-gray-800 dark:text-gray-50 hover:shadow-2xl"
+            whileHover={{ scale: 1.02 }}
+        >
+            {/* Image Section */}
+            <div className="relative">
+                <img
+                    src={item.thumbnail}
+                    alt="Item Thumbnail"
+                    className="object-cover object-center w-full h-56 transition-transform duration-300 md:h-48 lg:h-56 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black to-transparent group-hover:opacity-50"></div>
+            </div>
+
+            {/* Content Section */}
+            <div className="flex flex-col flex-grow p-4">
+                {/* Content Area that grows to push button down */}
+                <div className="flex-grow">
+                    <h2 className="text-xl font-bold text-gray-800 truncate dark:text-gray-100">
                         {item.title}
                     </h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 md:text-base line-clamp-2">
+                    <p className="w-full overflow-hidden text-sm text-gray-600 text-ellipsis whitespace-nowrap dark:text-gray-300">
                         {item.description}
                     </p>
+                    <div className="pt-3 mt-4 text-sm text-gray-500 border-t border-gray-200 dark:border-gray-600 dark:text-gray-400">
+                        <p>
+                            <span className="font-semibold">Category:</span>{" "}
+                            {item.category}
+                        </p>
+                        <p>
+                            <span className="font-semibold">Type:</span>{" "}
+                            {item.postType}
+                        </p>
+                        <p>
+                            <span className="font-semibold">Location:</span>{" "}
+                            {item.location}
+                        </p>
+                        <p>
+                            <span className="font-semibold">Status:</span>{" "}
+                            {item.status}
+                        </p>
+                    </div>
                 </div>
 
-                <div className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-                    <p>
-                        <strong>Category:</strong> {item.category}
-                    </p>
-                    <p>
-                        <strong>Type:</strong> {item.postType}
-                    </p>
-                    <p>
-                        <strong>Location:</strong> {item.location}
-                    </p>
-                    <p>
-                        <strong>Status:</strong> {item.status}
-                    </p>
-                </div>
-
-                <motion.div
-                    whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    <Link
-                        to={`/items/${item._id}`}
-                        className="flex items-center justify-center w-full p-3 mt-4 font-semibold tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
+                {/* Button fixed at the bottom */}
+                <div className="mt-4">
+                    <motion.div
+                        whileHover={{
+                            scale: 1.05,
+                            transition: { duration: 0.2 },
+                        }}
+                        whileTap={{ scale: 0.95 }}
                     >
-                        View Details
-                    </Link>
-                </motion.div>
+                        <Link
+                            to={`/items/${item._id}`}
+                            className="block px-4 py-2 font-semibold tracking-wide text-center text-white transition-colors duration-200 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
+                        >
+                            View Details
+                        </Link>
+                    </motion.div>
+                </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

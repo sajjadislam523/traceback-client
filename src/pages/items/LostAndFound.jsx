@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import ItemCard from "../../components/ItemCard.jsx";
 import Loading from "../../components/Loading.jsx";
@@ -11,6 +11,7 @@ const LostAndFound = () => {
     const [search, setSearch] = useState("");
     const { theme } = useTheme();
     const { loading, setLoading } = useAuth();
+    const [sort, setSort] = useState("date_desc");
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -23,6 +24,27 @@ const LostAndFound = () => {
         };
         fetchItems();
     }, [search, setLoading]);
+
+    const sortedItems = useMemo(() => {
+        let sorted = [...items];
+        if (sort === "date_desc") {
+            // Assumes each item has a createdAt property
+            sorted.sort(
+                (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+            );
+        } else if (sort === "date_asc") {
+            sorted.sort(
+                (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+            );
+        } else if (sort === "title_asc") {
+            // Assumes each item has a title property
+            sorted.sort((a, b) => a.title.localeCompare(b.title));
+        } else if (sort === "title_desc") {
+            sorted.sort((a, b) => b.title.localeCompare(a.title));
+        }
+        return sorted;
+    }, [items, sort]);
+
     return (
         <>
             <Helmet>
@@ -61,6 +83,27 @@ const LostAndFound = () => {
                     </div>
                 </div>
 
+                <div
+                    className={`flex justify-center py-4 ${
+                        theme === "dark" ? "bg-gray-800" : "bg-white"
+                    }`}
+                >
+                    <select
+                        className={`px-4 py-2 rounded shadow border ${
+                            theme === "dark"
+                                ? "bg-gray-900 text-gray-200 border-gray-700"
+                                : "bg-white text-gray-800 border-gray-300"
+                        }`}
+                        value={sort}
+                        onChange={(e) => setSort(e.target.value)}
+                    >
+                        <option value="date_desc">Newest First</option>
+                        <option value="date_asc">Oldest First</option>
+                        <option value="title_asc">Title A-Z</option>
+                        <option value="title_desc">Title Z-A</option>
+                    </select>
+                </div>
+
                 {/* Header */}
                 <div
                     className={`py-8 ${
@@ -85,7 +128,7 @@ const LostAndFound = () => {
                                 : "bg-white text-gray-900"
                         }`}
                     >
-                        {items.map((item) => (
+                        {sortedItems.map((item) => (
                             <ItemCard key={item._id} item={item} />
                         ))}
                     </div>

@@ -11,16 +11,14 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false); // for mobile menu toggle
 
     const links = (
-        <div className="flex flex-col gap-2 text-sm lg:gap-6 lg:text-lg lg:flex-row">
+        <div className="flex flex-col gap-2 text-sm lg:gap-6 lg:text-base lg:flex-row">
             <NavLink
                 to="/"
                 onClick={() => setIsMenuOpen(false)}
                 className={({ isActive }) =>
-                    `font-medium ${
-                        isActive
-                            ? "underline text-indigo-600 dark:text-indigo-400"
-                            : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"
-                    } `
+                    isActive
+                        ? "font-medium text-indigo-600 dark:text-indigo-400 underline hover:underline"
+                        : "hover:text-indigo-500 text-gray-600 dark:text-gray-100"
                 }
             >
                 Home
@@ -29,11 +27,9 @@ const Navbar = () => {
                 to="/allItems"
                 onClick={() => setIsMenuOpen(false)}
                 className={({ isActive }) =>
-                    `font-medium ${
-                        isActive
-                            ? "underline font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
-                            : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"
-                    } `
+                    isActive
+                        ? "font-medium text-indigo-600 dark:text-indigo-400 underline hover:underline"
+                        : "hover:text-indigo-500 text-gray-600 dark:text-gray-100"
                 }
             >
                 Lost & Found
@@ -75,11 +71,9 @@ const Navbar = () => {
                 to="/blogPost"
                 onClick={() => setIsMenuOpen(false)}
                 className={({ isActive }) =>
-                    `font-medium ${
-                        isActive
-                            ? "underline font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
-                            : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"
-                    } `
+                    isActive
+                        ? "font-medium text-indigo-600 dark:text-indigo-400 underline hover:underline"
+                        : "hover:text-indigo-500 text-gray-600 dark:text-gray-100"
                 }
             >
                 Blog

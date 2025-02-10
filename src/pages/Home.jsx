@@ -16,10 +16,13 @@ import img1 from "../assets/lostItems/lostBag.jpg";
 import img2 from "../assets/lostItems/lostDog.jpg";
 import img3 from "../assets/lostItems/lostGadget.jpg";
 import ItemCard from "../components/ItemCard.jsx";
+import Loading from "../components/Loading";
+import useAuth from "../hooks/useAuth";
 import useTheme from "../hooks/useTheme.jsx";
 
 const Home = () => {
     const { theme } = useTheme();
+    const { loading } = useAuth();
 
     const [items, setItems] = useState([]);
 
@@ -163,16 +166,26 @@ const Home = () => {
                             <h2 className="mb-8 text-2xl font-bold text-center text-gray-800 sm:text-3xl dark:text-gray-100">
                                 Latest Find & Lost Items
                             </h2>
-                            <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-                                {items
-                                    .sort(
-                                        (a, b) =>
-                                            new Date(b.date) - new Date(a.date)
-                                    )
-                                    .slice(0, 6)
-                                    .map((item) => (
-                                        <ItemCard key={item._id} item={item} />
-                                    ))}
+                            <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                {loading ? (
+                                    <div className="flex items-center justify-center col-span-full">
+                                        <Loading />
+                                    </div>
+                                ) : (
+                                    items
+                                        .sort(
+                                            (a, b) =>
+                                                new Date(b.date) -
+                                                new Date(a.date)
+                                        )
+                                        .slice(0, 6)
+                                        .map((item) => (
+                                            <ItemCard
+                                                key={item._id}
+                                                item={item}
+                                            />
+                                        ))
+                                )}
                             </div>
                             <div className="mt-8 text-center">
                                 <Link

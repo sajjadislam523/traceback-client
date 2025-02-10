@@ -28,7 +28,6 @@ const LostAndFound = () => {
     const sortedItems = useMemo(() => {
         let sorted = [...items];
         if (sort === "date_desc") {
-            // Assumes each item has a createdAt property
             sorted.sort(
                 (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
             );
@@ -37,7 +36,6 @@ const LostAndFound = () => {
                 (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
             );
         } else if (sort === "title_asc") {
-            // Assumes each item has a title property
             sorted.sort((a, b) => a.title.localeCompare(b.title));
         } else if (sort === "title_desc") {
             sorted.sort((a, b) => b.title.localeCompare(a.title));

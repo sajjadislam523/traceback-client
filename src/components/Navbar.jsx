@@ -58,7 +58,7 @@ const Navbar = () => {
                         : "hover:text-indigo-500 text-gray-600 dark:text-gray-300"
                 }
             >
-                Manage My Items
+                My Items
             </NavLink>
             <NavLink
                 to="/allRecovered"
